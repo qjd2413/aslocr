@@ -280,14 +280,14 @@ CNN_MODEL.compile(loss='binary_crossentropy',
               optimizer='rmsprop',
               metrics=['accuracy'])
 
-# predicting images
-img = image.load_img('./asl-alphabet/asl_alphabet_test/C_test.jpg', target_size=(img_width, img_height))
+#predicting images
+img = image.load_img('./asl-alphabet/asl_alphabet_test/G_test.jpg', target_size=(img_width, img_height))
 x = image.img_to_array(img)
 x = np.expand_dims(x, axis=0)
 
 images = np.vstack([x])
-classes = CNN_MODEL.predict(images, steps=100)
-#print(classes)
+classes = CNN_MODEL.predict(images, batch_size=10)
+print(classes)
 
 # predicting multiple images at once
 # img = image.load_img('./asl-alphabet/asl_alphabet_test/K_test.jpg', target_size=(img_width, img_height))
@@ -297,11 +297,22 @@ classes = CNN_MODEL.predict(images, steps=100)
 # pass the list of multiple images np.vstack()
 # images = np.vstack([x, y])
 # classes = CNN_MODEL.predict(images, batch_size=10)
-
+# predictions  = []
+# for filename in os.listdir('./asl-alphabet/asl_alphabet_test/'):
+#     name = './asl-alphabet/asl_alphabet_test/' + filename
+#     img = image.load_img(name, target_size=(img_width, img_height))
+#     x = image.img_to_array(img)
+#     x = np.expand_dims(x, axis=0)
+#
+#     images = np.vstack([x])
+#     classes = CNN_MODEL.predict(images, batch_size=10)
+#     predictions.append(np.argmax(classes, axis=1)[0])
+#
+# print(predictions)
 # print the classes, the images belong to
 #print(classes)
-print("argmax")
-print(np.argmax(classes,axis=1))
+# print("argmax")
+# print(np.argmax(classes,axis=1))
 #print (classes[0])
 #print (classes[0][0])
 
